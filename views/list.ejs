@@ -1,0 +1,29 @@
+<%- include("header") -%>
+
+  <div class="box" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+  <div class="box">
+    <% newListItems.forEach(function(item){ %>
+
+      <!-- in order to submit the action we mandatory need an enclosing form tag -->
+      <form action="/delete" method="post">
+          <div class="item">
+            <!-- the value will let us pass the id of the checked box to the app.js
+             in order to insert it into a delete function -->
+             <!-- onChange is an action and the value is a JS snippet -->
+             <!-- remember that the name on the tag allow us to tap into it in app.js -->
+            <input type="checkbox" onChange="this.form.submit()" name="cBox" value="<%= item._id %>">
+            <p><%=  item.name %></p>
+          </div>
+    <% }); %>
+      </form>
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off" required>
+        <button type="submit" name="list">+</button>
+      </form>
+  </div>
+
+<%- include("footer") -%>
